@@ -2,7 +2,6 @@
 
 **Tema do AM segundo semestre**
 
----
 
 A idéia base por trás de ***IAC*** ou **infraestructure as a code** é desenvolver e configurar a infraestrutura com base em código e ferramentas de automação de ambiente de forma que sua arquitetura possa ser versionada, testada e principalmente ***reproduzida*** sempre que necessário.
 
