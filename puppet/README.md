@@ -1,6 +1,6 @@
 ![alt tag](https://github.com/fiapsistemaslinux/iac/raw/master/images/puppet-labs-squarelogo.png)
 
-# Puppet
+# Automação de Infraestrutura com Puppet
 
 O Puppet é uma solução de automação de ambientes que opera no modelo client/server mantido pela empresa de mesmo nome, uma empresa privada de software com sede em Portland, Oregon especializada exatamente em automação e tecnologia e cujo foco e investimento nas chamadas culturas DevOps vem crescendo nos últimos anos.
 
