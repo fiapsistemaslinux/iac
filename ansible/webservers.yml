@@ -1,0 +1,11 @@
+# Modulo de Instalação de pacotes usando apt:
+# https://docs.ansible.com/ansible/latest/modules/apt_module.html
+
+---
+- hosts:
+    - webserver
+  strategy: free  
+  roles:
+    - { role: packages,  tags: ['packages']  }
+    - { role: mediawiki, tags: ['mediawiki']  }
+#   - { role: mysql,    tags: ['mysql']   }
