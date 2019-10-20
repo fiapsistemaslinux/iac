@@ -1,0 +1,36 @@
+# Modulos usados:
+# Download de Pacotes:   https://docs.ansible.com/ansible/latest/modules/get_url_module.html
+# Criação de Diretórios: https://docs.ansible.com/ansible/latest/modules/file_module.html
+# Empacotamento de arquivos: https://docs.ansible.com/ansible/latest/modules/unarchive_module.html
+
+- name: Download mediawiki tar file
+  get_url:
+    url: https://releases.wikimedia.org/mediawiki/{{ mediakiwi_version }}/mediawiki-{{ mediakiwi_version }}.{{ mediawiki_release }}.tar.gz
+    dest: /opt
+
+- name: Extract mediawiki into /var/lib/mediawiki
+  unarchive:
+    src: /opt/mediawiki-{{ mediakiwi_version }}.{{ mediawiki_release }}.tar.gz
+    dest: /var/lib/
+    remote_src: yes
+
+- name: Update php.ini file
+  template:
+    src: templates/php.ini.j2
+    dest: /etc/php/7.2/apache2/php.ini
+
+- name: enable php modules
+  shell: phpenmod {{ modules }}
+  vars:
+    modules:
+    - mbstring
+    - xml
+
+- name: Create symbolic link 
+  file:
+    src: /var/lib/mediawiki-{{ mediakiwi_version }}.{{ mediawiki_release }}
+    dest: /var/www/html/mediawiki
+    state: link
+
+- name: Flush Handlers
+  meta: flush_handlers

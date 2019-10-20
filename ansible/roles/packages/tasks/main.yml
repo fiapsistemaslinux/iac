@@ -1,0 +1,22 @@
+- name: Install a list of packages
+  apt:
+    name: "{{ packages }}"
+    state: latest
+    update_cache: yes
+  vars:
+    packages:
+    - git
+    - apache2
+    - libapache2-mod-php
+    - php-xml
+    - php-mbstring
+    - php-apcu
+    - php-intl
+    - php
+    - php-mysql
+    - php-gd
+    - php-cli
+    - php-curl
+    - imagemagick
+    - inkscape
+  when: ansible_facts['os_family'] == 'Debian'

@@ -1,0 +1,5 @@
+[webserver]
+X.X.X.X ansible_ssh_user=ubuntu ansible_ssh_private_key_file="{PATH TO YOUR PRIVATE KEY}"
+
+[database]
+X.X.X.X ansible_ssh_user=ubuntu ansible_ssh_private_key_file="{PATH TO YOUR PRIVATE KEY}"
