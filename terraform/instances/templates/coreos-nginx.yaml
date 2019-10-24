@@ -1,0 +1,28 @@
+#cloud-config
+ssh_authorized_keys:
+  - ssh-rsa XXXXXX
+coreos:
+  units:
+  - name: nginx.service
+    command: start
+    enable: true
+    content: |
+      [Install]
+      WantedBy=multi-user.target
+      
+      [Unit]
+      Description=nginx
+      After=docker.service
+      After=nginx.service
+      Wants=docker.service
+      
+      [Service]
+      Restart=always
+      RestartSec=10s
+      ExecStartPre=-/usr/bin/docker rm nginx
+      ExecStart=/usr/bin/docker run \
+                --name nginx \
+                --net host \
+                nginx:1.14.2-alpine
+      ExecStop=/usr/bin/docker stop nginx
+      ExecStopPost=/usr/bin/docker rm nginx

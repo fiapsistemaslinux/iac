@@ -1,0 +1,4 @@
+.terraform
+terraform.state
+terraform/instances/state/terraform.tfstate
+terraform/instances/state/terraform.tfstate.backup

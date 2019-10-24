@@ -1,0 +1,28 @@
+#cloud-config
+ssh_authorized_keys:
+  - ssh-rsa XXXXXXX
+coreos:
+  units:
+  - name: httpd.service
+    command: start
+    enable: true
+    content: |
+      [Install]
+      WantedBy=multi-user.target
+      
+      [Unit]
+      Description=httpd
+      After=docker.service
+      After=httpd.service
+      Wants=docker.service
+      
+      [Service]
+      Restart=always
+      RestartSec=10s
+      ExecStartPre=-/usr/bin/docker rm httpd
+      ExecStart=/usr/bin/docker run \
+                --name httpd \
+                --publish 80:8080 \
+                centos/httpd-24-centos7:latest
+      ExecStop=/usr/bin/docker stop httpd
+      ExecStopPost=/usr/bin/docker rm httpd
